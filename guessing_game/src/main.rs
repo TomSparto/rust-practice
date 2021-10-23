@@ -11,6 +11,7 @@ fn main() {
         println!("Please input your guess.");
 
         let mut guess = String::new();
+        let mut answer = String::new();
 
         io::stdin()
             .read_line(&mut guess)
@@ -27,7 +28,15 @@ fn main() {
             Ordering::Greater => println!("Too big!"),
             Ordering::Equal => {
                 println!("You win!");
-                break;
+                println!("Would you like to play again (y or n)");
+                io::stdin()
+                    .read_line(&mut answer)
+                    .expect("Failed to read line");
+                if answer.trim() == "y" {
+                    main();
+                } else {
+                    break;
+                }
             }
         }
     }
